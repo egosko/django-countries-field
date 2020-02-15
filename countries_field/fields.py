@@ -1,7 +1,8 @@
 # coding: utf-8
+from django import VERSION
 from django.db import models
-from django.db.models.fields.subclassing import Creator
 
+from .compat import Creator
 from .bitfield.models import BitField, MAX_FLAG_COUNT
 from .forms import CountriesFormField
 from .countries_list import ALPHA2_INDEX, ALL_COUNTRIES
@@ -192,8 +193,12 @@ class CountriesFieldDescriptor(Creator):
 class CountriesField(models.Field):
     """ Класс поля для хранения битовой карты стран. """
 
-    def contribute_to_class(self, cls, name, virtual_only=True):
-        super(CountriesField, self).contribute_to_class(cls, name, virtual_only=True)
+    def contribute_to_class(self, cls, name, private_only=True):
+        if VERSION < (1, 10):
+            super(CountriesField, self).contribute_to_class(cls, name, virtual_only=True)
+        else:
+            super(CountriesField, self).contribute_to_class(cls, name, private_only=True)
+
         self.bit_field_names = []
         if not cls._meta.abstract:
             for i in range(0, 4):

@@ -1,11 +1,10 @@
 from __future__ import absolute_import
 
-from django.utils import six
+import six
 from django.db.models import signals
 from django.db.models.fields import Field, BigIntegerField
-from django.db.models.fields.subclassing import Creator
-from django.db.models.fields.subclassing import SubfieldBase
 
+from ..compat import Creator, SubfieldBase
 from .forms import BitFormField
 from .query import BitQueryLookupWrapper
 from .types import BitHandler, Bit
