@@ -1,4 +1,5 @@
 # coding: utf-8
+import sys
 import gettext
 import pycountry
 from django.conf import settings
@@ -33,7 +34,11 @@ class CountriesFormField(MultipleChoiceField):
                 lang = settings.LANGUAGE_CODE[0:2]
                 locale = gettext.translation('iso3166', pycountry.LOCALES_DIR,
                                          languages=[lang])
-                choices = ((k, locale.ugettext(v)) for k, v in choices)
+                if sys.version > '2':
+                    locale_gettext = locale.gettext
+                else:
+                    locale_gettext = locale.ugettext
+                choices = ((k, locale_gettext(v)) for k, v in choices)
             except IOError:
                 pass
 

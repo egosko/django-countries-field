@@ -14,7 +14,7 @@ setup(
     packages=find_packages(),
     zip_safe=False,
     install_requires=[
-        'Django>=1.7,<1.10',
+        'Django>=1.7,<3.0.3',
         'pycountry==1.20',
     ],
     test_suite='runtests.runtests',
@@ -29,5 +29,6 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.7',
     ],
 )
