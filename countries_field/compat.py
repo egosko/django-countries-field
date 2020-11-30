@@ -9,8 +9,7 @@ class SubfieldBase(type):
     has the descriptor protocol attached to it.
     """
     def __new__(cls, name, bases, attrs):
-        warnings.warn("SubfieldBase has been deprecated. Use Field.from_db_value instead.",
-                  None, stacklevel=2)
+        warnings.warn("SubfieldBase has been deprecated. Use Field.from_db_value instead.", stacklevel=2)
 
         new_class = super(SubfieldBase, cls).__new__(cls, name, bases, attrs)
         new_class.contribute_to_class = make_contrib(
